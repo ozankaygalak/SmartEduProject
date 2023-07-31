@@ -6,4 +6,6 @@ router.route('/').post(courseControllers.createCourse);
 
 router.route('/').get(courseControllers.getCourses);
 
+router.route('/:slug').get(courseControllers.getCourse);
+
 module.exports = router;

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs");
 const mongoose = require('mongoose');
+
 const pageRouter = require('./routes/pageRoute');
 const courseRouter = require('./routes/courseRoute');
 app.set("view engine", "ejs");
