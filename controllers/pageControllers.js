@@ -15,3 +15,15 @@ exports.getContactPage = (req, res) => {
     page_name: "contact",
   });
 };
+
+exports.getUser = (req, res) => {
+  res.render("register", {
+    page_name: "register",
+  });
+};
+
+exports.getLoginUser = (req, res) => {
+  res.render("login", {
+    page_name: "login",
+  });
+};
