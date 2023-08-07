@@ -16,6 +16,10 @@ const UserSchema = new schema({
     type: String,
     unique: true,
   },
+  roles : {
+    type: String,
+    enum : ['student','teacher','admin']
+  }
 });
 UserSchema.pre("save", function (next) {
   const user = this;
