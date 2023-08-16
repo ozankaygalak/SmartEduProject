@@ -2,7 +2,7 @@ const Category = require("../models/Category");
 
 exports.createCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
+    const category = await Category.create(req.body.category);
     res.status(200).json({
       status: "success",
       category,

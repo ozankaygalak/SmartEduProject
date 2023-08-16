@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const ejs = require("ejs");
+const flash = require("connect-flash");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const categoryRouter = require("./routes/categoryRoute");
 const pageRouter = require("./routes/pageRoute");
 const courseRouter = require("./routes/courseRoute");
@@ -26,15 +28,21 @@ app.use(
 );
 app.use("*", (req, res, next) => {
   userIN = req.session.userID;
-  console.log(userIN);
   next();
 });
+
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashMessages = req.flash();
+  next();
+});
+
+app.use(methodOverride("_method", { methods: ["GET", "POST"] }));
 
 app.use("/", pageRouter);
 app.use("/courses", courseRouter);
 app.use("/category", categoryRouter);
 app.use("/users", userRouter);
-
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/smartedu-db")

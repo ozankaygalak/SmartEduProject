@@ -16,16 +16,35 @@ const UserSchema = new schema({
     type: String,
     unique: true,
   },
-  roles : {
+  roles: {
     type: String,
-    enum : ['student','teacher','admin']
-  }
+    enum: ["student", "teacher", "admin"],
+  },
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
-UserSchema.pre("save", function (next) {
+// UserSchema.pre("save", function (next) {
+//   const user = this;
+//   bcrypt.hash(user.password, 10, (error, hash) => {
+//     user.password = hash;
+//     next();
+//   });
+// });
+UserSchema.pre('save', function(next) {
   const user = this;
-  bcrypt.hash(user.password, 10, (error, hash) => {
-    user.password = hash;
-    next();
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(10, function(err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.password, salt, function(err, hash) {
+          if (err) return next(err);
+          user.password = hash;
+          next();
+      });
   });
 });
 

@@ -6,6 +6,4 @@ exports.login = async (req, res, next) => {
       return res.redirect("/");
     }
     next();
-  
-  
 };
