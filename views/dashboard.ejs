@@ -26,16 +26,16 @@
 							</div><!-- end col -->
 						</div><!-- end row -->
 						<div class="row mt-5">
-							<% for( let i = 0 ; i < user.courses.length; i++) { %>
-							<div class="col-lg-6 col-md-6 col-12">
-								
+							<% for( let i=0 ; i < user.courses.length; i++) { %>
+								<div class="col-lg-6 col-md-6 col-12">
+
 									<div class="course-item mb-5">
 										<div class="image-blog">
 											<img src="/images/blog_1.jpg" alt="" class="img-fluid">
 										</div>
 										<div class="course-br">
 											<div class="course-title">
-												<h2><a href="/course" title="">
+												<h2><a href="/courses/<%= user.courses[i].slug %>" title="">
 														<%= user.courses[i].name %>
 													</a></h2>
 											</div>
@@ -43,18 +43,19 @@
 												<p>
 													<%= user.courses[i].description %>
 												</p>
-											
+
 												<form method="POST" action="/courses/release">
-													<input type="hidden" name="course_id" value="<%= user.courses[i]._id %>">
+													<input type="hidden" name="course_id"
+														value="<%= user.courses[i]._id %>">
 													<button class="btn btn-lg text-white btn-warning">RELEASE</button>
 												</form>
-												
+
 											</div>
 										</div>
 									</div>
-									
-							</div><!-- end col -->
-							<% } %>
+
+								</div><!-- end col -->
+								<% } %>
 						</div><!-- end row -->
 					</div><!-- end container -->
 				</div><!-- end section -->
@@ -83,75 +84,91 @@
 												</div>
 												<% } %>
 													<% } %>
-									<div class="col-lg-12 text-center">
-										<button class="btn btn-lg btn-warning rounded-0 text-white" data-dismiss="modal"
-											href="#" data-toggle="modal" data-target="#addCourse">
-											<span>Create New Course</span>
-										</button>
-									</div>
+														<div class="col-lg-12 text-center">
+															<button class="btn btn-lg btn-warning rounded-0 text-white"
+																data-dismiss="modal" href="#" data-toggle="modal"
+																data-target="#addCourse">
+																<span>Create New Course</span>
+															</button>
+														</div>
 
-									<div class="modal" id="addCourse">
-										<div class="col-sm-12 justify-center ">
-											<div class="author-bio">
-												<div class="modal-header">
-													<form class="form" action="/courses" method="POST">
-														<div class="form-group">
-															<input class="form-control mb-1" name="name" type="text"
-																placeholder="Course name..">
-															<input class="form-control mb-1" name="description"
-																type="text" placeholder="Course description.." required>
-															<input class="form-control mb-1" name="roles"
-																value="<%= user.roles %>" type="hidden">
-															<select class="form-control mb-1" name="category">
-																<% for(let i=0;i< category.length ; i++) { %>
-																	<option value="<%= category[i]._id %>">
-																		<%= category[i].name %>
-																	</option>
-																	<% } %>
-															</select>
-															<input name="teacher" value="<%= user._id %>" type="hidden">
-															<div class="clearfix">
-																<button
-																	class="btn btn-light btn-radius btn-brd grd1 btn-block"
-																	type="submit">Submit</button>
-																<button
-																	class=" btn btn-light btn-radius btn-brd grd1 btn-block"
-																	data-dismiss="modal" type="submit">Cancel</button>
+														<div class="modal" id="addCourse">
+															<div class="col-sm-12 justify-center ">
+																<div class="author-bio">
+																	<div class="modal-header">
+																		<form class="form" action="/courses"
+																			method="POST">
+																			<div class="form-group">
+																				<input class="form-control mb-1"
+																					name="name" type="text"
+																					placeholder="Course name..">
+																				<input class="form-control mb-1"
+																					name="description" type="text"
+																					placeholder="Course description.."
+																					required>
+																				<input class="form-control mb-1"
+																					name="roles"
+																					value="<%= user.roles %>"
+																					type="hidden">
+																				<select class="form-control mb-1"
+																					name="category">
+																					<% for(let i=0;i< category.length ;
+																						i++) { %>
+																						<option
+																							value="<%= category[i]._id %>">
+																							<%= category[i].name %>
+																						</option>
+																						<% } %>
+																				</select>
+																				<input name="teacher"
+																					value="<%= user._id %>"
+																					type="hidden">
+																				<div class="clearfix">
+																					<button
+																						class="btn btn-light btn-radius btn-brd grd1 btn-block"
+																						type="submit">Submit</button>
+																					<button
+																						class=" btn btn-light btn-radius btn-brd grd1 btn-block"
+																						data-dismiss="modal"
+																						type="submit">Cancel</button>
+
+																				</div>
+																			</div>
+																		</form>
+
+																	</div>
+																</div>
 
 															</div>
+
 														</div>
-													</form>
+														<div class="col-lg-12 blog-post-single">
+															<div class="blog-author">
+																<div class="author-bio">
+																	<h3 class="author_name"><a href="#">
+																			<%= user.name%>
+																		</a></h3>
+																	<h5>
+																		<%= user.roles %> <a href="#">Educator</a>
+																	</h5>
+																	<p class="author_det">
+																		Lorem ipsum dolor sit amet, consectetur adip,
+																		sed do eiusmod tempor
+																		incididunt ut aut reiciendise voluptat maiores
+																		alias consequaturs
+																		aut
+																		perferendis doloribus omnis saperet docendi nec,
+																		eos ea alii
+																		molestiae
+																		aliquand.
+																	</p>
+																</div>
+																<div class="author-desc">
+																	<img src="/images/author.jpg" alt="about author">
+																</div>
+															</div>
 
-												</div>
-											</div>
-
-										</div>
-
-									</div>
-									<div class="col-lg-12 blog-post-single">
-										<div class="blog-author">
-											<div class="author-bio">
-												<h3 class="author_name"><a href="#">
-														<%= user.name%>
-													</a></h3>
-												<h5>
-													<%= user.roles %> <a href="#">Educator</a>
-												</h5>
-												<p class="author_det">
-													Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor
-													incididunt ut aut reiciendise voluptat maiores alias consequaturs
-													aut
-													perferendis doloribus omnis saperet docendi nec, eos ea alii
-													molestiae
-													aliquand.
-												</p>
-											</div>
-											<div class="author-desc">
-												<img src="/images/author.jpg" alt="about author">
-											</div>
-										</div>
-
-									</div><!-- end col -->
+														</div><!-- end col -->
 								</div><!-- end row -->
 
 								<div class="row mt-5">
@@ -174,30 +191,36 @@
 													</div>
 													<div class="clearfix">
 														<ul style="list-style-type: none;">
-															<li style="float: left;"> <button data-toggle="modal" data-target="#updateCourse<%= courses[i]._id %>" class="btn btn-primary text-white">
-																Update
-															</button> </li>
-															<li style="float: right;"><a href="/courses/<%= courses[i].slug %>?_method=DELETE" 
-																onclick="return confirm('Kursu silmek istediğinden emin misin ? ')"
-																class="btn btn-danger text-white">
-																Delete
-															</a> </li>
+															<li style="float: left;"> <button data-toggle="modal"
+																	data-target="#updateCourse<%= courses[i]._id %>"
+																	class="btn btn-primary text-white">
+																	Update
+																</button> </li>
+															<li style="float: right;"><a
+																	href="/courses/<%= courses[i].slug %>?_method=DELETE"
+																	onclick="return confirm('Kursu silmek istediğinden emin misin ? ')"
+																	class="btn btn-danger text-white">
+																	Delete
+																</a> </li>
 														</ul>
 													</div>
-													
+
 												</div>
 											</div>
 										</div><!-- end col -->
-										<div class="modal" id="updateCourse<%= courses[i]._id %>" tabindex="-1" role="dialog" >
+										<div class="modal" id="updateCourse<%= courses[i]._id %>" tabindex="-1"
+											role="dialog">
 											<div class="modal modal-dialog-centered modal-lg " role="document">
 												<div class="author-bio">
 													<div class="modal-header">
-														<form class="form" method="POST" action="/courses/<%= courses[i].slug %>?_method=PUT" >
+														<form class="form" method="POST"
+															action="/courses/<%= courses[i].slug %>?_method=PUT">
 															<div class="form-group">
 																<input class="form-control mb-1" name="name" type="text"
 																	value="<%= courses[i].name %>">
 																<input class="form-control mb-1" name="description"
-																	type="text" value="<%= courses[i].description %>" required>
+																	type="text" value="<%= courses[i].description %>"
+																	required>
 																<input class="form-control mb-1" name="roles"
 																	value="<%= user.roles %>" type="hidden">
 																<select class="form-control mb-1" name="category">
@@ -207,24 +230,26 @@
 																		</option>
 																		<% } %>
 																</select>
-																<input name="teacher" value="<%= user._id %>" type="hidden">
+																<input name="teacher" value="<%= user._id %>"
+																	type="hidden">
 																<div class="clearfix">
 																	<button
 																		class="btn btn-light btn-radius btn-brd grd1 btn-block"
 																		type="submit">Submit</button>
 																	<button
 																		class=" btn btn-light btn-radius btn-brd grd1 btn-block"
-																		data-dismiss="modal" type="submit">Cancel</button>
-	
+																		data-dismiss="modal"
+																		type="submit">Cancel</button>
+
 																</div>
 															</div>
 														</form>
-	
+
 													</div>
 												</div>
-	
+
 											</div>
-	
+
 										</div>
 										<% } %>
 
@@ -232,4 +257,108 @@
 							</div><!-- end container -->
 						</div><!-- end section -->
 						<% } %>
-							<%- include('partials/_footer') %>
+							<% if(user.roles==='admin' ) {%>
+								<div class="all-title-box">
+									<div class="container text-center">
+										<h1>
+											<%= user.name %><span class="m_1">
+													<% user.roles==='admin' %>
+												</span>
+										</h1>
+									</div>
+								</div>
+
+								<table class="table table-striped">
+									<thead>
+										<h2>USERS</h2>
+										<tr>
+											<th scope="col">#ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Email</th>
+											<th scope="col">Role</th>
+											<th scope="col">DELETE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(let i=0; i< users.length ; i++) { %>
+											<tr>
+												<th scope="row">
+													<%= users[i]._id %>
+												</th>
+												<td>
+													<%= users[i].name %>
+												</td>
+												<td>
+													<%= users[i].email %>
+												</td>
+												<td>
+													<%= users[i].roles %>
+												</td>
+												<td><a href="/users/<%= users[i]._id %>?_method=DELETE"
+														onclick="return confirm(`${users[i].name} kişini silmek istediğine emin misin ?`)"
+														class="btn btn-lg btn-danger text-white"> DELETE </a></td>
+											</tr>
+											<% } %>
+
+									</tbody>
+								</table>
+
+								<table class="table table-striped">
+									<thead>
+										<h2>CATEGORY</h2>
+										<tr>
+											<th scope="col">Name</th>
+											<th scope="col"> <a data-toggle="modal" data-target="#addCategory"
+													class="btn btn-lg btn-success text-white" href="#">Add Category</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(let i=0; i< category.length ; i++) { %>
+											<tr>
+												<th scope="row">
+													<%= i+1 %>
+												</th>
+												<td>
+													<%= category[i].name %>
+												</td>
+												<td><a href="/category/<%= category[i].slug %>?_method=DELETE"
+														onclick="return confirm(`${users[i].name} kategorisini silmek istediğinize emin misin ?`)"
+														class="btn btn-lg btn-danger text-white"> DELETE </a></td>
+											</tr>
+											<% } %>
+
+									</tbody>
+								</table>
+								<div class="modal" id="addCategory" tabindex="-1" role="dialog">
+									<div class="modal modal-dialog-centered modal-lg " role="document">
+										<div class="author-bio">
+											<div class="modal-header">
+												<form class="form" method="POST" action="/category">
+													<div class="form-group">
+														<input class="form-control mb-1" name="name" type="text"
+															placeholder="Kategori adı giriniz">
+
+													</div>
+													<div class="clearfix">
+														<button
+															class="btn btn-light btn-radius btn-brd grd1 btn-block"
+															type="submit">Submit</button>
+														<button
+															class=" btn btn-light btn-radius btn-brd grd1 btn-block"
+															data-dismiss="modal"
+															type="submit">Cancel</button>
+
+													</div>
+												</form>
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+								<% } %>
+
+									<%- include('partials/_footer') %>

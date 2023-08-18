@@ -10,18 +10,19 @@
 
 		<div id="overviews" class="section wb">
 			<div class="container">
-				<div class="row">
-					<% if(flashMessages) { %>
-						<% if(flashMessages.success) { %>
-							<div class="alert alert-success">
-								<%= flashMessages.success %>
+				<% if(flashMessages) { %>
+					<% if(flashMessages.success) { %>
+						<div class="alert alert-success">
+							<%= flashMessages.success %>
+						</div>
+						<% } else if(flashMessages.error) { %>
+							<div class="alert alert-danger">
+								<%= flashMessages.error %>
 							</div>
-							<% } else if(flashMessages.error) { %>
-								<div class="alert alert-danger">
-									<%= flashMessages.error %>
-								</div>
+							<% } %>
 								<% } %>
-									<% } %>
+				<div class="row">
+					
 										<div class="col-lg-9 blog-post-single">
 											<div class="row">
 												<% for(let i=0;i< courses.length; i++) { %>
@@ -29,11 +30,11 @@
 													<div class="col-lg-6 col-md-6 col-12">
 														<div class="course-item mb-5">
 															<div class="image-blog">
-																<img src="images/blog_1.jpg" alt="" class="img-fluid">
+																<img src="/images/blog_1.jpg" alt="" class="img-fluid">
 															</div>
 															<div class="course-br">
 																<div class="course-title">
-																	<h2><a href="courses/<%= courses[i].slug %>"
+																	<h2><a href="/courses/<%= courses[i].slug %>"
 																			title="">
 																			<%= courses[i].name %>
 																		</a></h2>

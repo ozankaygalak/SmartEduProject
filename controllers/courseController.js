@@ -78,7 +78,7 @@ exports.enrollCourse = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.session.userID });
     const courseId = req.body.course_id;
-
+    
     user.courses.push(courseId);
     await user.save();
     res.status(200).redirect("/users/dashboard");
